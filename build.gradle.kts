@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
 plugins {
 	kotlin("jvm") version "2.1.20"
 	application
@@ -37,4 +39,8 @@ tasks.register<JavaExec>("texttest") {
 
 application {
 	mainClass.set("com.gildedrose.TexttestFixtureKt")
+}
+val compileKotlin: KotlinCompile by tasks
+compileKotlin.compilerOptions {
+	freeCompilerArgs.set(listOf("-Xwhen-guards"))
 }
