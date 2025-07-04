@@ -1,13 +1,17 @@
 package com.gildedrose
 
 class GildedRose(val items: List<Item>) {
-
     fun updateQuality() {
         for (i in items.indices) {
-            if (items[i].name != "Aged Brie" && items[i].name != "Backstage passes to a TAFKAL80ETC concert") {
+            if (items[i].name != "Aged Brie" && items[i].name != "Backstage passes to a TAFKAL80ETC concert" ) {
                 if (items[i].quality > 0) {
                     if (items[i].name != "Sulfuras, Hand of Ragnaros") {
                         items[i].quality = items[i].quality - 1
+                    }
+                    if (items[i].quality > 0) {
+                        if (items[i].name.startsWith("Conjured")){
+                            items[i].quality = items[i].quality - 1
+                        }
                     }
                 }
             } else {
@@ -40,6 +44,11 @@ class GildedRose(val items: List<Item>) {
                         if (items[i].quality > 0) {
                             if (items[i].name != "Sulfuras, Hand of Ragnaros") {
                                 items[i].quality = items[i].quality - 1
+                            }
+                            if (items[i].quality > 0) {
+                                if (items[i].name.startsWith("Conjured")){
+                                    items[i].quality = items[i].quality - 1
+                                }
                             }
                         }
                     } else {
