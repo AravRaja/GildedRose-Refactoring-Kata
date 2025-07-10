@@ -9,9 +9,9 @@ sealed class Rule {
         }
     }
 
-    data class DecreaseSellIn(val num: Int): Rule() {
+    data class DecreaseSellIn(val amount: Int): Rule() {
         override fun apply(item: Item){
-           item.sellIn -= num
+           item.sellIn -= amount
         }
     }
 

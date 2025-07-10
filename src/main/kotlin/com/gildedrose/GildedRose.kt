@@ -3,45 +3,17 @@ package com.gildedrose
 class GildedRose(val items: List<Item>) {
 
     fun updateQuality() {
-        for (i in items.indices) {
+        items.forEach {item ->
 
-            val rules = when {
-                items[i].name == "Aged Brie" -> listOf(
-                    Rule.QualityUpdateOverSellInRange(1, 1..50),
-                    Rule.QualityUpdateOverSellInRange(2, Int.MIN_VALUE..0),
-                    Rule.DecreaseSellIn(1),
-                    Rule.ConstrainQuality(0..50)
-                )
-                items[i].name == "Sulfuras, Hand of Ragnaros" -> listOf(
-                    Rule.ConstrainQuality(0..80)
-                )
-                items[i].name.startsWith("Backstage passes") -> listOf(
-
-                    Rule.QualityUpdateOverSellInRange(1, 11..50),
-                    Rule.QualityUpdateOverSellInRange(2, 6..10),
-                    Rule.QualityUpdateOverSellInRange(3, 1..5),
-                    Rule.QualityUpdateOverSellInRange(-items[i].quality, Int.MIN_VALUE..0),
-                    Rule.DecreaseSellIn(1),
-                    Rule.ConstrainQuality(0..50)
-                )
-                items[i].name.startsWith("Conjured") -> listOf(
-
-                    Rule.QualityUpdateOverSellInRange(-2, 1..50),
-                    Rule.QualityUpdateOverSellInRange(-4, Int.MIN_VALUE..0),
-                    Rule.DecreaseSellIn(1),
-                    Rule.ConstrainQuality(0..50)
-
-                )
-                else -> listOf (
-
-                    Rule.QualityUpdateOverSellInRange(-1, 1..50),
-                    Rule.QualityUpdateOverSellInRange(-2, Int.MIN_VALUE..0),
-                    Rule.DecreaseSellIn(1),
-                    Rule.ConstrainQuality(0..50)
-                )
+           when {
+                item.name == "Aged Brie" -> Items.AgedBrie.update(item)
+                item.name == "Sulfuras, Hand of Ragnaros" -> Items.Sulfuras.update(item)
+                item.name.startsWith("Backstage passes") -> Items.BackstagePass.update(item)
+                item.name.startsWith("Conjured") -> Items.Conjured.update(item)
+                else -> Items.NormalItem.update(item)
 
             }
-            for (rule in rules) rule.apply(items[i])
+
 
 
         }
